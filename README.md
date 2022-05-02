@@ -3,7 +3,7 @@
 
 ### Introduction
 We propose Word2Pix: a one-stage visual grounding network based on encoder-decoder transformer architecture that enables learning for textual to visual feature correspondence via word to pixel attention. Each word from the query sentence is given an equal opportunity when attending to visual pixels through multiple stacks of transformer decoder layers; thus is able to focus on grounding-critical words rather than words that are dominant for the sentence representation. Refer to our [paper](https://arxiv.org/pdf/2108.00205.pdf) for more details.
-<p align="center"> <img src='docs/visualization.jpg' height="540px"> </p>
+<p align="center"> <img src='img/visualization.png' height="400px"> </p>
 
 ### Prerequisites
 * Python 3.8
@@ -29,6 +29,7 @@ The default directory paths(argument 'coco_path == ./cocopth') should be the fol
 
 
 ## Performance
+We provide the pretrained model weights in [GDRIVE]()
 <table>
     <thead>
         <tr>
