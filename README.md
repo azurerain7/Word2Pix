@@ -42,7 +42,11 @@ The default directory paths(argument 'coco_path == ./cocopth') should be the fol
     data.pkl            
 ```
 3. Run script cache_text_feat.py for each dataset to cache pretrained BERT feature for all text query(will be saved under ./prepro/dataset_split/sentid2bert_feat/. 
-
+```
+CUDA_VISIBLE_DEVICES=0 python3.8 cache_text_feat.py --dataset_split=refcoco_unc
+CUDA_VISIBLE_DEVICES=0 python3.8 cache_text_feat.py --dataset_split=refcoco+_unc
+CUDA_VISIBLE_DEVICES=0 python3.8 cache_text_feat.py --dataset_split=refcocog_umd
+```
 
 ## Performance
 We provide the pretrained model weights in [GDRIVE](https://drive.google.com/drive/folders/119XPeQV-IisyC_C55vSonACnArLYrLe_?usp=sharing), put them in ./ckpt folder.
