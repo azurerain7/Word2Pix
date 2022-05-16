@@ -46,11 +46,8 @@ class W2P(nn.Module):
 
         self.class_embed = nn.Linear(hidden_dim, num_classes + 1)
         self.bbox_embed = MLP(hidden_dim, hidden_dim, 4, 3)
-
-        # self.query_embed = nn.Embedding(vocab_size, hidden_dim, padding_idx=0)
-        # self.query_pos_embed = nn.Embedding(self.num_queries, hidden_dim)
-        # self.input_word_proj = nn.Linear(bert_dim, hidden_dim)
         self.input_proj = nn.Conv2d(backbone.num_channels, hidden_dim, kernel_size=1)
+        self._reset_parameters()
 
 
     def forward(self, samples: NestedTensor,input_word_ids, input_word_masks, sent_str: Optional[str] = None):
@@ -88,10 +85,7 @@ class W2P(nn.Module):
             pos=None, 
             query_pos=query_pos_embedding).transpose(1, 2)
 
-        # return hs.transpose(1, 2), memory.permute(1, 2, 0).view(bs, c, h, w)
-
         #hs size: [6,bs,que_len,hidden_dim_dec(256)]
-        # hs = self.output_proj(hs)
 
         outputs_mclass_prob = self.sigmoid(self.attr_mclass_embed(hs))
         outputs_class = self.class_embed(hs)
@@ -100,6 +94,10 @@ class W2P(nn.Module):
         out = {'outputs_mclass_prob':outputs_mclass_prob[-1], 'pred_logits': outputs_class[-1], 'pred_boxes': outputs_coord[-1]}
         return out
 
+    def _reset_parameters(self):
+        for p in self.parameters():
+            if p.dim() > 1:
+                nn.init.xavier_uniform_(p)
 
 class TransformerDecoder(nn.Module):
 
