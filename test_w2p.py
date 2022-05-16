@@ -47,7 +47,7 @@ def main():
 
     # * Dataset parameters
     parser.add_argument('--dataset_split', default='refcoco_unc',choices=('refcoco_unc','refcoco+_unc','refcocog_umd'))
-    parser.add_argument('--bert_feat_rt', default='../MAttNet/cache/prepro/', help="pretrained bert feature for ref sentences")
+    parser.add_argument('--bert_feat_rt', default='./prepro/', help="pretrained bert feature for ref sentences")
     parser.add_argument('--coco_path', default=r'./cocopth', type=str)
 
     # * Backbone
