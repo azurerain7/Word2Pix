@@ -87,6 +87,7 @@ class RefDataset(torch.utils.data.Dataset):
         assert self.data_h5_arr.shape[1] == self.label_length, 'label.shape[1] not match label_length'
         
         self.coco_train, self.coco_test=build_dataset(image_set='train', coco_path=args.coco_path,train_mode=args.pretrained)
+        print('train_mode:',args.pretrained)
         refId_to_imgBoxId_fn = osp.join(args.refId_to_imgBoxId_path, 'refId_to_imgBoxId_%s.npy'%args.dataset_split)
         self.refId_to_imgBoxId = np.load(refId_to_imgBoxId_fn, allow_pickle=True).item()
         # prepare attributes
@@ -120,6 +121,7 @@ class RefDataset(torch.utils.data.Dataset):
         self.feat_dim = 768
         #refcocox dataset: [Ntok, 768]: [CLS],tk0,tk1,...
         self.bert_feat_pth = osp.join(args.bert_feat_rt,args.dataset_split,'sentid2bert_feat')
+        print(self.bert_feat_pth)
         self.feat_len = self.label_length
         self.train_val = train_val
 
@@ -201,7 +203,9 @@ class RefDataset(torch.utils.data.Dataset):
         # bert feats
         if self.use_pretrained_lfeat:
           sents = []
+          # sent = torch.zeros(1,self.feat_len,self.feat_dim)
           sents_mask = []
+          # sent_mask = [True]*self.feat_len
           for i, sent_id in enumerate(pos_sent_ids):
             sent = torch.zeros(1,self.feat_len,self.feat_dim)
             sent_mask = [True]*self.feat_len
@@ -213,7 +217,6 @@ class RefDataset(torch.utils.data.Dataset):
               sent_mask[:len(feat)] = [False]*len(feat)
               sents_mask.append(sent_mask)
         # word tokens
-        #TODO?:add inference pipeline from BERT
         else:
           sents = [self.fetch_seq(sent_id) for sent_id in pos_sent_ids]
           sents_mask = [sent==0 for sent in sents]
