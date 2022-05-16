@@ -170,7 +170,7 @@ def main():
             
             boxes=torch.from_numpy(boxes)
             input_word_ids = torch.from_numpy(sent).to(device)
-            input_word_masks = torch.from_numpy(sent_mask).long()
+            input_word_masks = torch.from_numpy(sent_mask).long().to(device)
 
             with torch.no_grad():
                 outputs = model(img.to(device),input_word_ids, input_word_masks)
