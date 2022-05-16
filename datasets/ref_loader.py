@@ -38,7 +38,8 @@ class RefDataset(torch.utils.data.Dataset):
         train_val='train'):
 
         data_json = osp.join(args.bert_feat_rt,args.dataset_split,'data.json')
-        data_h5 = osp.join(args.bert_feat_rt,args.dataset_split,'data.h5')
+        # data_h5 = osp.join(args.bert_feat_rt,args.dataset_split,'data.h5')
+        data_h5 = osp.join(args.bert_feat_rt,args.dataset_split,'data.pkl')
         
         print('Loader loading data.json: ', data_json)
         self.info = json.load(open(data_json))
@@ -70,7 +71,8 @@ class RefDataset(torch.utils.data.Dataset):
         
         # read data_h5 if exists: 
         #data_h5 stores tokenized words of all sents capped at label_length(refg:15,other:10)
-        self.data_h5 = None
+        
+        '''
         if data_h5 is not None:
           #if .h5 file invalid, convert to .pkl
           if data_h5.endswith('.h5'):
@@ -82,7 +84,11 @@ class RefDataset(torch.utils.data.Dataset):
             print('Loader loading data.pkl: %s', data_h5)
             with open(data_h5, 'rb') as f:
               self.data_h5_arr = pickle.load(f)
-
+        '''
+        print('Loader loading data.pkl: %s', data_h5)
+        with open(data_h5, 'rb') as f:
+          self.data_h5_arr = pickle.load(f)
+          
         assert self.data_h5_arr.shape[0] == len(self.sentences), 'label.shape[0] not match sentences'
         assert self.data_h5_arr.shape[1] == self.label_length, 'label.shape[1] not match label_length'
         
