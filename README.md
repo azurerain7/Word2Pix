@@ -18,7 +18,7 @@ git clone https://github.com/azurerain7/Word2Pix
 2. Download MSCOCO images(Refcoco/+/g images are subsets) and Refcoco/+/g annotations
 * Download and extract COCO 2017 train and val images from
 [http://cocodataset.org](http://cocodataset.org/#download).
-The default directory paths(argument 'coco_path == ./cocopth') should be the following structure:
+The default directory paths should be the following structure:
 ```
 ./cocopth/
   annotations/  # annotation json files
