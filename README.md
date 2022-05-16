@@ -25,7 +25,23 @@ The default directory paths(argument 'coco_path == ./cocopth') should be the fol
   train2017/    # train images
   val2017/      # val images
 ```
-* Follow [REFER](https://github.com/lichengunc/refer) to download the Refcoco/+/g annotations; then follow the training step 1 in [MAttNet](https://github.com/lichengunc/MAttNet) to extract relevant grounding information. To facilitate and skip this step, we provide preprocessed training and evaluation data of Refcoco/+/g for downloading through this [link]().
+* Follow [REFER](https://github.com/lichengunc/refer) to download the Refcoco/+/g annotations; then follow the training step 1 in [MAttNet](https://github.com/lichengunc/MAttNet) to extract relevant grounding information. To facilitate and skip this step, we provide preprocessed data for Refcoco/+/g for downloading through this [link](https://drive.google.com/drive/folders/111faXKgTVluoe0dbNlBPieqSLgyyfazo?usp=sharing). The default directory paths should be like this:
+```
+./prepro/
+  refcoco_unc/  
+    sentid2bert_feat/   # cached text feature folder
+    data.json           # annotation json file
+    data.pkl            # non-bert text feature(optional)
+  refcoco+_unc/  
+    sentid2bert_feat/   
+    data.json           
+    data.pkl            
+  refcocog_umd/  
+    sentid2bert_feat/   
+    data.json           
+    data.pkl            
+```
+3. Run script cache_text_feat.py for each dataset to cache pretrained BERT feature for all text query(will be saved under ./prepro/dataset_split/sentid2bert_feat/. 
 
 
 ## Performance
