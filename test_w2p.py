@@ -99,6 +99,7 @@ def main():
     #REFCOCO
     args.dataset_split = 'refcoco_unc' 
     #PARTIAL INIT: encoder scratch
+    #args.pretrained=False
     #args.checkpoint = r'../chpt/refcoco_enc_scratch.pth'#8144/7256/v7738 
     #ENCODER transfer from refcoco det
     #args.checkpoint = r'../chpt/refcoco_enc_trans.pth' #8213/7649/v7898
