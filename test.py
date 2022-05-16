@@ -55,7 +55,7 @@ def main():
     parser.add_argument('--learn_query_pos_embedding', default=True, type=bool,help="learn PosEmb instead of fixed sine1d emb for query") 
     parser.add_argument('--position_embedding', default='sine', type=str, choices=('sine', 'learned'),
                         help="Type of positional embedding to use on top of the image features")
-
+    parser.add_argument('--num_queries', default=10, type=int, help="Number of text query tokens")
     # * Transformer
     parser.add_argument('--enc_layers', default=6, type=int, help="Number of encoding layers in the transformer")
     parser.add_argument('--dec_layers', default=3, type=int,help="Number of decoding layers in the transformer")
@@ -103,15 +103,15 @@ def main():
     #ENCODER transfer from refcoco det
     #args.checkpoint = r'../chpt/refcoco_enc_trans.pth' #8213/7649/v7898
     #ENCODER INIT: detr encoder
-    args.checkpoint = r'../chpt/refcoco_enc_detr.pth' #8439/7812/v8112
+    args.checkpoint = r'../chpt/refcoco_enc_detr.pth' #8439/7812/v8112 
     
     #REFCOCO+
     # args.dataset_split = 'refcoco+_unc' 
-    # args.checkpoint = r'../chpt/refcocop_sota.pth' #7611/6124/v6974
+    # args.checkpoint = r'../ckpt/refcocop_sota.pth' #7611/6124/v6974
 
     #REFCOCOg
     # args.dataset_split = 'refcocog_umd' 
-    # args.checkpoint = r'../chpt/refcocogumd_sota.pth'  #7081/7134
+    # args.checkpoint = r'../ckpt/refcocogumd_sota.pth'  #7081/7134)
 
     dataset_test_list = []
     dataset_val = RefDataset(args, train_val='val')

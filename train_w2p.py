@@ -52,6 +52,7 @@ def main():
     parser.add_argument('--position_embedding', default='sine', type=str, choices=('sine', 'learned'),
                         help="Type of positional embedding to use on top of the image features")
 
+    parser.add_argument('--num_queries', default=10, type=int, help="Number of text query tokens")
     # * Transformer
     parser.add_argument('--enc_layers', default=6, type=int, help="Number of encoding layers in the transformer")
     parser.add_argument('--dec_layers', default=3, type=int,help="Number of decoding layers in the transformer")
