@@ -29,7 +29,7 @@ The default directory paths(argument 'coco_path == ./cocopth') should be the fol
 
 
 ## Performance
-We provide the pretrained model weights in [GDRIVE]().
+We provide the pretrained model weights in [GDRIVE](https://drive.google.com/drive/folders/119XPeQV-IisyC_C55vSonACnArLYrLe_?usp=sharing), put them in ./ckpt folder.
 <table>
     <thead>
         <tr>
