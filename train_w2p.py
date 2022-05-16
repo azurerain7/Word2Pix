@@ -43,7 +43,7 @@ def main():
     
     # * Dataset parameters
     parser.add_argument('--dataset_split', default='refcoco_unc',choices=('refcoco_unc','refcoco+_unc','refcocog_umd'))
-    parser.add_argument('--bert_feat_rt', default='../MAttNet/cache/prepro/', help="pretrained bert feature for ref sentences")
+    parser.add_argument('--bert_feat_rt', default='./prepro/', help="pretrained bert feature for ref sentences")
     parser.add_argument('--seq_per_ref', default=3, type=int, help="Number of sentences per refered object for training")
     parser.add_argument('--coco_path', default=r'./cocopth', type=str)
 
@@ -225,17 +225,10 @@ def train_one_epoch(model: torch.nn.Module, criterion: torch.nn.Module,
     print_freq = 20
 
     for img, sent, sent_mask, cls_lb, boxes, attr_lb in metric_logger.log_every(data_loader, print_freq, header):
-
-        input_word_ids = torch.from_numpy(sent)
-        input_word_masks = torch.from_numpy(sent_mask).long()
-
-        m = (input_word_masks.sum(dim=0)!=input_word_masks.size(0))
-        bsz = input_word_masks.size(0)
-        dim = input_word_ids.size(2)
-        msk = m.repeat(input_word_masks.size(0),1)
-
-        input_word_masks = input_word_masks[msk].view(bsz,-1).bool().to(device)
-        input_word_ids = input_word_ids[msk].view(bsz,-1,dim).to(device)
+            
+        boxes=torch.from_numpy(boxes)
+        input_word_ids = torch.from_numpy(sent).to(device)
+        input_word_masks = torch.from_numpy(sent_mask).long().to(device)
 
         outputs = model(img.to(device),input_word_ids, input_word_masks)
         loss_dict = criterion(outputs, {'cls_labels':cls_lb,'gt_boxes':boxes,'attr_labels':attr_lb})
