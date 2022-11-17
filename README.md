@@ -100,12 +100,16 @@ CUDA_VISIBLE_DEVICES=0 python3.8 test_w2p.py
 
 ## Citation
 
-    @misc{
-      author = {Zhao, Heng and Zhou, Joey Tianyi and Ong, Yew-Soon},
-      title = {Word2Pix: Word to Pixel Cross Attention Transformer in Visual Grounding},
-      publisher = {arXiv https://arxiv.org/abs/2108.00205},
-      year = {2021}
-    }
+    @ARTICLE{9806393, 
+      author={Zhao, Heng and Zhou, Joey Tianyi and Ong, Yew-Soon},  
+      journal={IEEE Transactions on Neural Networks and Learning Systems},   
+      title={Word2Pix: Word to Pixel Cross-Attention Transformer in Visual Grounding},   
+      year={2022},  
+      volume={},  
+      number={},  
+      pages={1-11},  
+      doi={10.1109/TNNLS.2022.3183827}
+      }
 
 ## Credits
 Our code is built on [DETR](https://github.com/facebookresearch/detr) and partial of the codes are from [MAttNet](https://github.com/lichengunc/MAttNet).
